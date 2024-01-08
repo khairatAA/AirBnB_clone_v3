@@ -18,7 +18,6 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(data['status'], 'OK')
 
-
     def test_page_not_found(self):
         """Checks if the 404 route works whwn an invalid request is made"""
         response = self.app.get('/api/v1/not_found')
@@ -26,7 +25,7 @@ class TestApp(unittest.TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(data['error'], 'Not found')
-        
+
 
 if __name__ == '__main__':
     unittest.main()
