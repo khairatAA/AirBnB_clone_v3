@@ -24,7 +24,7 @@ def get_a_state(id):
     """get_a_state: Retrieves a State object"""
     for state in storage.all(State).values():
         if (state.id == id):
-            return (state.to_dict())
+            return jsonify(state.to_dict())
 
     abort(404)
 
@@ -38,8 +38,9 @@ def delete_a_state(id):
     """Deletes a State object"""
     for state in storage.all(State).values():
         if (state.id == id):
-            del state
-            return {}, 200
+            storage.delete(state)
+            storage.save()
+            return jsonify({}, 200)
 
     abort(404)
 
@@ -57,7 +58,7 @@ def create_state():
             state.name = request_data.get("name")
             storage.new(state)
             storage.save()
-            return (state.to_dict(), 201)
+            return jsonify(state.to_dict(), 201)
     else:
         return ("Not a JSON", 400)
 
