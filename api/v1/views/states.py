@@ -40,7 +40,7 @@ def delete_a_state(id):
         if (state.id == id):
             storage.delete(state)
             storage.save()
-            return jsonify({}, 200)
+            return (jsonify({}), 200)
 
     abort(404)
 
@@ -58,7 +58,7 @@ def create_state():
             state.name = request_data.get("name")
             storage.new(state)
             storage.save()
-            return jsonify(state.to_dict(), 201)
+            return (jsonify(state.to_dict()), 201)
     else:
         return ("Not a JSON", 400)
 
