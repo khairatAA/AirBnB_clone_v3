@@ -69,7 +69,7 @@ def create_place(id):
             if request_data:
                 if "user_id" not in request_data:
                     return ("Missing user_id", 400)
-                if "user_id" in request_data:
+                elif "user_id" in request_data:
                     for user in storage.all(User).values():
                         if (user.id != request_data["user_id"]):
                             abort(404)
@@ -79,7 +79,7 @@ def create_place(id):
                     place = Place()
                     place.user_id = request_data.get("user_id")
                     place.name = request_data.get("name")
-                    place.id = id
+                    place.city_id = id
                     storage.new(place)
                     storage.save()
                     return (jsonify(place.to_dict()), 201)
