@@ -91,11 +91,9 @@ def create_city(state_id):
         )
 def update_city(city_id):
     """Updates a City object"""
-    print(f'City: {city_id}')
 
     for city in storage.all(City).values():
         if city.id == city_id:
-            print(f'City info: {city}')
             if request.get_json() is None:
                 abort(400, description="Not a JSON")
 
@@ -105,9 +103,7 @@ def update_city(city_id):
             for key, value in data.items():
                 if key not in ignore:
                     setattr(city, key, value)
-
             storage.save()
-            print(f'Updated info: {city}')
 
             return (jsonify(city.to_dict()), 200)
     abort(404)
